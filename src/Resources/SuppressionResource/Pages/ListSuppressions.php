@@ -1,9 +1,9 @@
 <?php
 
-namespace Backstage\FilamentMails\Resources\SuppressionResource\Pages;
+namespace Vormkracht10\FilamentMails\Resources\SuppressionResource\Pages;
 
-use Backstage\FilamentMails\Resources\SuppressionResource;
 use Filament\Resources\Pages\ListRecords;
+use Vormkracht10\FilamentMails\Resources\SuppressionResource;
 
 class ListSuppressions extends ListRecords
 {

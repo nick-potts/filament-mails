@@ -1,10 +1,10 @@
 <?php
 
-namespace Backstage\FilamentMails;
+namespace Vormkracht10\FilamentMails;
 
-use Backstage\FilamentMails\Controllers\MailDownloadController;
-use Backstage\FilamentMails\Controllers\MailPreviewController;
 use Illuminate\Support\Facades\Route;
+use Vormkracht10\FilamentMails\Controllers\MailDownloadController;
+use Vormkracht10\FilamentMails\Controllers\MailPreviewController;
 
 class FilamentMails
 {

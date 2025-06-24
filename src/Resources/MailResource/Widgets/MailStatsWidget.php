@@ -1,6 +1,6 @@
 <?php
 
-namespace Backstage\FilamentMails\Resources\MailResource\Widgets;
+namespace Vormkracht10\FilamentMails\Resources\MailResource\Widgets;
 
 use Filament\Facades\Filament;
 use Filament\Widgets\StatsOverviewWidget as BaseWidget;
@@ -28,7 +28,7 @@ class MailStatsWidget extends BaseWidget
         }
 
         $generateUrl = function (string $activeTab): ?string {
-            $panel = Filament::getCurrentOrDefaultPanel();
+            $panel = Filament::getCurrentPanel();
             $tenant = Filament::getTenant();
 
             if (! $panel || ! $tenant) {

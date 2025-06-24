@@ -1,39 +1,34 @@
 <?php
 
-namespace Backstage\FilamentMails\Resources;
+namespace Vormkracht10\FilamentMails\Resources;
 
-use Backstage\FilamentMails\Resources\MailResource\Pages\ListMails;
-use Backstage\FilamentMails\Resources\MailResource\Pages\ViewMail;
-use Backstage\FilamentMails\Resources\MailResource\Widgets\MailStatsWidget;
-use Backstage\Mails\Actions\ResendMail;
-use Backstage\Mails\Enums\EventType;
-use Backstage\Mails\Models\Mail;
-use Backstage\Mails\Models\MailEvent;
-use Filament\Actions\Action;
-use Filament\Actions\BulkAction;
-use Filament\Actions\BulkActionGroup;
-use Filament\Actions\DeleteBulkAction;
-use Filament\Actions\ViewAction;
 use Filament\Facades\Filament;
 use Filament\Forms\Components\TagsInput;
+use Filament\Infolists\Components\Grid;
 use Filament\Infolists\Components\RepeatableEntry;
+use Filament\Infolists\Components\Section;
+use Filament\Infolists\Components\Tabs;
+use Filament\Infolists\Components\Tabs\Tab;
 use Filament\Infolists\Components\TextEntry;
 use Filament\Infolists\Components\ViewEntry;
+use Filament\Infolists\Infolist;
 use Filament\Notifications\Notification;
 use Filament\Resources\Resource;
-use Filament\Schemas\Components\Grid;
-use Filament\Schemas\Components\Section;
-use Filament\Schemas\Components\Tabs;
-use Filament\Schemas\Components\Tabs\Tab;
-use Filament\Schemas\Schema;
-use Filament\Tables\Columns\IconColumn;
-use Filament\Tables\Columns\TextColumn;
+use Filament\Tables;
+use Filament\Tables\Actions\Action;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
 use Illuminate\Support\HtmlString;
 use Illuminate\View\View;
+use Vormkracht10\FilamentMails\Resources\MailResource\Pages\ListMails;
+use Vormkracht10\FilamentMails\Resources\MailResource\Pages\ViewMail;
+use Vormkracht10\FilamentMails\Resources\MailResource\Widgets\MailStatsWidget;
+use Vormkracht10\Mails\Actions\ResendMail;
+use Vormkracht10\Mails\Enums\EventType;
+use Vormkracht10\Mails\Models\Mail;
+use Vormkracht10\Mails\Models\MailEvent;
 
 class MailResource extends Resource
 {
@@ -75,10 +70,10 @@ class MailResource extends Resource
         return __('Emails');
     }
 
-    public static function infolist(Schema $schema): Schema
+    public static function infolist(Infolist $infolist): Infolist
     {
-        return $schema
-            ->components([
+        return $infolist
+            ->schema([
                 Section::make('General')
                     ->icon('heroicon-o-envelope')
                     ->compact()
@@ -183,7 +178,7 @@ class MailResource extends Resource
                                                     ->label(__('Type'))
                                                     ->badge()
                                                     ->url(function (MailEvent $record) {
-                                                        $panel = Filament::getCurrentOrDefaultPanel();
+                                                        $panel = Filament::getCurrentPanel();
                                                         $tenant = Filament::getTenant();
 
                                                         if (! $panel || ! $tenant) {
@@ -210,7 +205,7 @@ class MailResource extends Resource
                                                     }),
                                                 TextEntry::make('occurred_at')
                                                     ->url(function (MailEvent $record) {
-                                                        $panel = Filament::getCurrentOrDefaultPanel();
+                                                        $panel = Filament::getCurrentPanel();
                                                         $tenant = Filament::getTenant();
 
                                                         if (! $panel || ! $tenant) {
@@ -323,7 +318,7 @@ class MailResource extends Resource
             ->defaultSort('created_at', 'desc')
             ->paginated([50, 100, 'all'])
             ->columns([
-                TextColumn::make('status')
+                Tables\Columns\TextColumn::make('status')
                     ->label(__('Status'))
                     ->sortable()
                     ->searchable(false)
@@ -340,32 +335,32 @@ class MailResource extends Resource
                         __('Unsent') => 'gray',
                         default => 'gray',
                     }),
-                TextColumn::make('subject')
+                Tables\Columns\TextColumn::make('subject')
                     ->label(__('Subject'))
                     ->limit(35)
                     ->sortable()
                     ->searchable(['subject', 'html', 'text']),
-                IconColumn::make('attachments')
+                Tables\Columns\IconColumn::make('attachments')
                     ->label('')
                     ->alignLeft()
                     ->searchable(false)
                     ->getStateUsing(fn (Mail $record) => $record->attachments->count() > 0)
                     ->icon(fn (string $state): string => $state ? 'heroicon-o-paper-clip' : ''),
-                TextColumn::make('to')
+                Tables\Columns\TextColumn::make('to')
                     ->label(__('Recipient(s)'))
                     ->limit(50)
                     ->getStateUsing(fn (Mail $record) => self::formatMailState(emails: $record->to, mailOnly: true))
                     ->sortable()
                     ->searchable(),
-                TextColumn::make('opens')
+                Tables\Columns\TextColumn::make('opens')
                     ->label(__('Opens'))
                     ->tooltip(fn (Mail $record) => __('Last opened at :date', ['date' => $record->last_opened_at?->format('d-m-Y H:i')]))
                     ->sortable(),
-                TextColumn::make('clicks')
+                Tables\Columns\TextColumn::make('clicks')
                     ->label(__('Clicks'))
                     ->tooltip(fn (Mail $record) => __('Last clicked at :date', ['date' => $record->last_clicked_at?->format('d-m-Y H:i')]))
                     ->sortable(),
-                TextColumn::make('sent_at')
+                Tables\Columns\TextColumn::make('sent_at')
                     ->label(__('Sent At'))
                     ->dateTime('d-m-Y H:i')
                     ->since()
@@ -379,8 +374,8 @@ class MailResource extends Resource
             ->filters([
                 //
             ])
-            ->recordActions([
-                ViewAction::make()
+            ->actions([
+                Tables\Actions\ViewAction::make()
                     // ->url(null)
                     ->modal()
                     ->slideOver()
@@ -394,7 +389,7 @@ class MailResource extends Resource
                     ->modalDescription(__('Are you sure you want to resend this mail?'))
                     ->hiddenLabel()
                     ->tooltip(__('Resend'))
-                    ->schema(self::getResendForm())
+                    ->form(self::getResendForm())
                     ->fillForm(function (Mail $record) {
                         return [
                             'to' => array_keys($record->to ?: []),
@@ -411,14 +406,14 @@ class MailResource extends Resource
                             ->send();
                     }),
             ])
-            ->toolbarActions([
-                BulkActionGroup::make([
-                    BulkAction::make('resend')
+            ->bulkActions([
+                Tables\Actions\BulkActionGroup::make([
+                    Tables\Actions\BulkAction::make('resend')
                         ->label(__('Resend'))
                         ->icon('heroicon-o-arrow-uturn-right')
                         ->requiresConfirmation()
                         ->modalDescription(__('Are you sure you want to resend the selected mails?'))
-                        ->schema(fn ($records) => self::getBulkResendForm($records))
+                        ->form(fn ($records) => self::getBulkResendForm($records))
                         ->action(function (Collection $records, array $data) {
                             foreach ($records as $record) {
                                 (new ResendMail)->handle($record, $data['to'], $data['cc'] ?? [], $data['bcc'] ?? []);
@@ -430,7 +425,7 @@ class MailResource extends Resource
                                 ->send();
                         })
                         ->deselectRecordsAfterCompletion(),
-                    DeleteBulkAction::make(),
+                    Tables\Actions\DeleteBulkAction::make(),
                 ]),
             ]);
     }

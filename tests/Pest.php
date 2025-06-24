@@ -1,5 +1,5 @@
 <?php
 
-use Backstage\FilamentMails\Tests\TestCase;
+use Vormkracht10\FilamentMails\Tests\TestCase;
 
 uses(TestCase::class)->in(__DIR__);

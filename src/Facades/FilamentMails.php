@@ -1,16 +1,16 @@
 <?php
 
-namespace Backstage\FilamentMails\Facades;
+namespace Vormkracht10\FilamentMails\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
 /**
- * @see \Backstage\FilamentMails\FilamentMails
+ * @see \Vormkracht10\FilamentMails\FilamentMails
  */
 class FilamentMails extends Facade
 {
     protected static function getFacadeAccessor()
     {
-        return \Backstage\FilamentMails\FilamentMails::class;
+        return \Vormkracht10\FilamentMails\FilamentMails::class;
     }
 }

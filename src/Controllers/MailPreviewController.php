@@ -1,10 +1,10 @@
 <?php
 
-namespace Backstage\FilamentMails\Controllers;
+namespace Vormkracht10\FilamentMails\Controllers;
 
-use Backstage\Mails\Models\Mail;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Vormkracht10\Mails\Models\Mail;
 
 class MailPreviewController extends Controller
 {

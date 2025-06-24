@@ -1,22 +1,18 @@
 <?php
 
-namespace Backstage\FilamentMails\Resources;
+namespace Vormkracht10\FilamentMails\Resources;
 
-use Backstage\FilamentMails\Resources\EventResource\Pages\ListEvents;
-use Backstage\FilamentMails\Resources\EventResource\Pages\ViewEvent;
-use Backstage\Mails\Enums\EventType;
-use Backstage\Mails\Models\MailEvent;
-use Filament\Actions\BulkActionGroup;
-use Filament\Actions\DeleteBulkAction;
-use Filament\Actions\ViewAction;
+use Filament\Infolists\Components\Grid;
+use Filament\Infolists\Components\Section;
 use Filament\Infolists\Components\TextEntry;
-use Filament\Panel;
+use Filament\Infolists\Infolist;
 use Filament\Resources\Resource;
-use Filament\Schemas\Components\Grid;
-use Filament\Schemas\Components\Section;
-use Filament\Schemas\Schema;
-use Filament\Tables\Columns\TextColumn;
+use Filament\Tables;
 use Filament\Tables\Table;
+use Vormkracht10\FilamentMails\Resources\EventResource\Pages\ListEvents;
+use Vormkracht10\FilamentMails\Resources\EventResource\Pages\ViewEvent;
+use Vormkracht10\Mails\Enums\EventType;
+use Vormkracht10\Mails\Models\MailEvent;
 
 class EventResource extends Resource
 {
@@ -24,7 +20,7 @@ class EventResource extends Resource
 
     protected static bool $shouldRegisterNavigation = true;
 
-    public static function getSlug(?Panel $panel = null): string
+    public static function getSlug(): string
     {
         return config('filament-mails.resources.mail')::getSlug() . '/events';
     }
@@ -69,10 +65,10 @@ class EventResource extends Resource
         return 'heroicon-o-calendar';
     }
 
-    public static function infolist(Schema $schema): Schema
+    public static function infolist(Infolist $infolist): Infolist
     {
-        return $schema
-            ->components([
+        return $infolist
+            ->schema([
                 Section::make(__('Event Details'))
                     ->icon('heroicon-o-information-circle')
                     ->compact()
@@ -205,7 +201,7 @@ class EventResource extends Resource
             ->defaultSort('occurred_at', 'desc')
             ->paginated([50, 100, 'all'])
             ->columns([
-                TextColumn::make('type')
+                Tables\Columns\TextColumn::make('type')
                     ->label(__('Type'))
                     ->sortable()
                     ->badge()
@@ -223,10 +219,10 @@ class EventResource extends Resource
                         return ucwords(str_replace('_', ' ', $state->value));
                     })
                     ->searchable(),
-                TextColumn::make('mail.subject')
+                Tables\Columns\TextColumn::make('mail.subject')
                     ->label(__('Subject'))
                     ->searchable(['subject', 'payload']),
-                TextColumn::make('occurred_at')
+                Tables\Columns\TextColumn::make('occurred_at')
                     ->label(__('Occurred At'))
                     ->dateTime('d-m-Y H:i')
                     ->since()
@@ -237,8 +233,8 @@ class EventResource extends Resource
             ->filters([
                 //
             ])
-            ->recordActions([
-                ViewAction::make()
+            ->actions([
+                Tables\Actions\ViewAction::make()
                     ->url(null)
                     ->modal()
                     ->slideOver()
@@ -246,9 +242,9 @@ class EventResource extends Resource
                     ->hiddenLabel()
                     ->tooltip(__('View')),
             ])
-            ->toolbarActions([
-                BulkActionGroup::make([
-                    DeleteBulkAction::make(),
+            ->bulkActions([
+                Tables\Actions\BulkActionGroup::make([
+                    Tables\Actions\DeleteBulkAction::make(),
                 ]),
             ]);
     }
