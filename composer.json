@@ -1,5 +1,5 @@
 {
-    "name": "backstagephp/filament-mails",
+    "name": "backstage/filament-mails",
     "description": "View logged mails and events in a beautiful Filament UI.",
     "keywords": [
         "backstagephp",
@@ -23,7 +23,7 @@
         "php": "^8.2",
         "filament/filament": "^4.0",
         "spatie/laravel-package-tools": "^1.15.0",
-        "backstage/laravel-mails": "^1.0"
+        "backstage/laravel-mails": "^2.0"
     },
     "require-dev": {
         "laravel/pint": "^1.16",
@@ -69,5 +69,11 @@
         }
     },
     "minimum-stability": "dev",
-    "prefer-stable": true
+    "prefer-stable": true,
+    "repositories": {
+        "backstage/laravel-mails": {
+            "type": "vcs",
+            "url": "git@github.com:backstagephp/laravel-mails.git"
+        }
+    }
 }
