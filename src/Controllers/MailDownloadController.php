@@ -2,9 +2,9 @@
 
 namespace Vormkracht10\FilamentMails\Controllers;
 
-use Vormkracht10\Mails\Models\MailAttachment;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Config;
+use Vormkracht10\Mails\Models\MailAttachment;
 
 class MailDownloadController extends Controller
 {

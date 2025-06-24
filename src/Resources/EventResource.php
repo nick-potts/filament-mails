@@ -2,17 +2,16 @@
 
 namespace Vormkracht10\FilamentMails\Resources;
 
-use Filament\Panel;
-use Filament\Schemas\Schema;
-use Filament\Schemas\Components\Section;
-use Filament\Schemas\Components\Grid;
-use Filament\Tables\Columns\TextColumn;
-use Filament\Actions\ViewAction;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
+use Filament\Actions\ViewAction;
 use Filament\Infolists\Components\TextEntry;
+use Filament\Panel;
 use Filament\Resources\Resource;
-use Filament\Tables;
+use Filament\Schemas\Components\Grid;
+use Filament\Schemas\Components\Section;
+use Filament\Schemas\Schema;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Vormkracht10\FilamentMails\Resources\EventResource\Pages\ListEvents;
 use Vormkracht10\FilamentMails\Resources\EventResource\Pages\ViewEvent;

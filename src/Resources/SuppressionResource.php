@@ -2,13 +2,12 @@
 
 namespace Vormkracht10\FilamentMails\Resources;
 
-use Filament\Panel;
-use Filament\Tables\Columns\TextColumn;
 use Filament\Actions\Action;
 use Filament\Actions\ViewAction;
-use Filament\Schemas\Schema;
+use Filament\Panel;
 use Filament\Resources\Resource;
-use Filament\Tables;
+use Filament\Schemas\Schema;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Vormkracht10\FilamentMails\Resources\SuppressionResource\Pages\ListSuppressions;
