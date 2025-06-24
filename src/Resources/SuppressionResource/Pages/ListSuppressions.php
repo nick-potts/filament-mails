@@ -2,8 +2,8 @@
 
 namespace Backstage\FilamentMails\Resources\SuppressionResource\Pages;
 
-use Filament\Resources\Pages\ListRecords;
 use Backstage\FilamentMails\Resources\SuppressionResource;
+use Filament\Resources\Pages\ListRecords;
 
 class ListSuppressions extends ListRecords
 {

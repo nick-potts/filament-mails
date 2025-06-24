@@ -2,9 +2,9 @@
 
 namespace Backstage\FilamentMails\Controllers;
 
+use Backstage\Mails\Models\Mail;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use Backstage\Mails\Models\Mail;
 
 class MailPreviewController extends Controller
 {

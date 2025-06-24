@@ -2,6 +2,10 @@
 
 namespace Backstage\FilamentMails\Resources;
 
+use Backstage\FilamentMails\Resources\EventResource\Pages\ListEvents;
+use Backstage\FilamentMails\Resources\EventResource\Pages\ViewEvent;
+use Backstage\Mails\Enums\EventType;
+use Backstage\Mails\Models\MailEvent;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\ViewAction;
@@ -13,10 +17,6 @@ use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
-use Backstage\FilamentMails\Resources\EventResource\Pages\ListEvents;
-use Backstage\FilamentMails\Resources\EventResource\Pages\ViewEvent;
-use Backstage\Mails\Enums\EventType;
-use Backstage\Mails\Models\MailEvent;
 
 class EventResource extends Resource
 {

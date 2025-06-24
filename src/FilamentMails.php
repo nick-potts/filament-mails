@@ -2,9 +2,9 @@
 
 namespace Backstage\FilamentMails;
 
-use Illuminate\Support\Facades\Route;
 use Backstage\FilamentMails\Controllers\MailDownloadController;
 use Backstage\FilamentMails\Controllers\MailPreviewController;
+use Illuminate\Support\Facades\Route;
 
 class FilamentMails
 {

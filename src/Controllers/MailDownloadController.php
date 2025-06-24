@@ -2,9 +2,9 @@
 
 namespace Backstage\FilamentMails\Controllers;
 
+use Backstage\Mails\Models\MailAttachment;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Config;
-use Backstage\Mails\Models\MailAttachment;
 
 class MailDownloadController extends Controller
 {

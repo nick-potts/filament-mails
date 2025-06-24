@@ -2,12 +2,12 @@
 
 namespace Backstage\FilamentMails\Resources\EventResource\Pages;
 
-use Filament\Resources\Pages\ListRecords;
-use Filament\Schemas\Components\Tabs\Tab;
-use Illuminate\Database\Eloquent\Builder;
 use Backstage\FilamentMails\Resources\EventResource;
 use Backstage\Mails\Enums\EventType;
 use Backstage\Mails\Models\MailEvent;
+use Filament\Resources\Pages\ListRecords;
+use Filament\Schemas\Components\Tabs\Tab;
+use Illuminate\Database\Eloquent\Builder;
 
 class ListEvents extends ListRecords
 {

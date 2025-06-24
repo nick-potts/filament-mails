@@ -2,12 +2,12 @@
 
 namespace Backstage\FilamentMails;
 
-use Filament\Contracts\Plugin;
-use Filament\Panel;
-use Filament\Support\Colors\Color;
 use Backstage\FilamentMails\Resources\EventResource;
 use Backstage\FilamentMails\Resources\MailResource;
 use Backstage\FilamentMails\Resources\SuppressionResource;
+use Filament\Contracts\Plugin;
+use Filament\Panel;
+use Filament\Support\Colors\Color;
 
 class FilamentMailsPlugin implements Plugin
 {

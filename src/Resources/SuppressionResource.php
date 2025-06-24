@@ -2,6 +2,11 @@
 
 namespace Backstage\FilamentMails\Resources;
 
+use Backstage\FilamentMails\Resources\SuppressionResource\Pages\ListSuppressions;
+use Backstage\Mails\Enums\EventType;
+use Backstage\Mails\Enums\Provider;
+use Backstage\Mails\Events\MailUnsuppressed;
+use Backstage\Mails\Models\MailEvent;
 use Filament\Actions\Action;
 use Filament\Actions\ViewAction;
 use Filament\Panel;
@@ -10,11 +15,6 @@ use Filament\Schemas\Schema;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
-use Backstage\FilamentMails\Resources\SuppressionResource\Pages\ListSuppressions;
-use Backstage\Mails\Enums\EventType;
-use Backstage\Mails\Enums\Provider;
-use Backstage\Mails\Events\MailUnsuppressed;
-use Backstage\Mails\Models\MailEvent;
 
 class SuppressionResource extends Resource
 {

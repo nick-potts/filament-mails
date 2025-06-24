@@ -2,6 +2,13 @@
 
 namespace Backstage\FilamentMails\Resources;
 
+use Backstage\FilamentMails\Resources\MailResource\Pages\ListMails;
+use Backstage\FilamentMails\Resources\MailResource\Pages\ViewMail;
+use Backstage\FilamentMails\Resources\MailResource\Widgets\MailStatsWidget;
+use Backstage\Mails\Actions\ResendMail;
+use Backstage\Mails\Enums\EventType;
+use Backstage\Mails\Models\Mail;
+use Backstage\Mails\Models\MailEvent;
 use Filament\Actions\Action;
 use Filament\Actions\BulkAction;
 use Filament\Actions\BulkActionGroup;
@@ -27,13 +34,6 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
 use Illuminate\Support\HtmlString;
 use Illuminate\View\View;
-use Backstage\FilamentMails\Resources\MailResource\Pages\ListMails;
-use Backstage\FilamentMails\Resources\MailResource\Pages\ViewMail;
-use Backstage\FilamentMails\Resources\MailResource\Widgets\MailStatsWidget;
-use Backstage\Mails\Actions\ResendMail;
-use Backstage\Mails\Enums\EventType;
-use Backstage\Mails\Models\Mail;
-use Backstage\Mails\Models\MailEvent;
 
 class MailResource extends Resource
 {
