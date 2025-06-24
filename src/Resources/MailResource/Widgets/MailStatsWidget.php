@@ -28,7 +28,7 @@ class MailStatsWidget extends BaseWidget
         }
 
         $generateUrl = function (string $activeTab): ?string {
-            $panel = Filament::getCurrentPanel();
+            $panel = Filament::getCurrentOrDefaultPanel();
             $tenant = Filament::getTenant();
 
             if (! $panel || ! $tenant) {

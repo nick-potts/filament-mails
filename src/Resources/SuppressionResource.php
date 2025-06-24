@@ -2,7 +2,11 @@
 
 namespace Vormkracht10\FilamentMails\Resources;
 
-use Filament\Infolists\Infolist;
+use Filament\Panel;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Actions\Action;
+use Filament\Actions\ViewAction;
+use Filament\Schemas\Schema;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -19,7 +23,7 @@ class SuppressionResource extends Resource
 
     protected static bool $shouldRegisterNavigation = true;
 
-    public static function getSlug(): string
+    public static function getSlug(?Panel $panel = null): string
     {
         return config('filament-mails.resources.mail')::getSlug() . '/suppressions';
     }
@@ -103,12 +107,12 @@ class SuppressionResource extends Resource
         return $table
             ->defaultSort('occurred_at', 'desc')
             ->columns([
-                Tables\Columns\TextColumn::make('to')
+                TextColumn::make('to')
                     ->label(__('Email address'))
                     ->formatStateUsing(fn ($record) => key(json_decode($record->to ?? [])))
                     ->searchable(['to']),
 
-                Tables\Columns\TextColumn::make('id')
+                TextColumn::make('id')
                     ->label(__('Reason'))
                     ->badge()
                     ->formatStateUsing(fn ($record) => $record->type->value == EventType::COMPLAINED->value ? 'Complained' : 'Bounced')
@@ -117,7 +121,7 @@ class SuppressionResource extends Resource
                         default => 'gray',
                     }),
 
-                Tables\Columns\TextColumn::make('occurred_at')
+                TextColumn::make('occurred_at')
                     ->label(__('Occurred At'))
                     ->dateTime('d-m-Y H:i')
                     ->since()
@@ -125,22 +129,22 @@ class SuppressionResource extends Resource
                     ->sortable()
                     ->searchable(),
             ])
-            ->actions([
-                Tables\Actions\Action::make('unsuppress')
+            ->recordActions([
+                Action::make('unsuppress')
                     ->label(__('Unsuppress'))
                     ->action(function (MailEvent $record) {
                         event(new MailUnsuppressed(key($record->mail->to), $record->mail->mailer == 'smtp' && filled($record->mail->transport) ? $record->mail->transport : $record->mail->mailer, $record->mail->stream_id ?? null));
                     })
                     ->visible(fn ($record) => Provider::tryFrom($record->mail->mailer == 'smtp' && filled($record->mail->transport) ? $record->mail->transport : $record->mail->mailer)),
 
-                Tables\Actions\ViewAction::make()
+                ViewAction::make()
                     ->url(null)
                     ->modal()
                     ->slideOver()
                     ->label(__('View'))
                     ->hiddenLabel()
                     ->tooltip(__('View'))
-                    ->infolist(fn (Infolist $infolist) => EventResource::infolist($infolist)),
+                    ->schema(fn (Schema $schema) => EventResource::infolist($schema)),
             ]);
     }
 

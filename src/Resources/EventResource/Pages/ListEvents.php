@@ -2,8 +2,7 @@
 
 namespace Vormkracht10\FilamentMails\Resources\EventResource\Pages;
 
-// use App\Filament\Widgets\MailsPerStatusChart;
-use Filament\Resources\Components\Tab;
+use Filament\Schemas\Components\Tabs\Tab;
 use Filament\Resources\Pages\ListRecords;
 use Illuminate\Database\Eloquent\Builder;
 use Vormkracht10\FilamentMails\Resources\EventResource;

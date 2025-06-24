@@ -2,20 +2,26 @@
 
 namespace Vormkracht10\FilamentMails\Resources;
 
+use Filament\Schemas\Schema;
+use Filament\Schemas\Components\Section;
+use Filament\Schemas\Components\Tabs;
+use Filament\Schemas\Components\Tabs\Tab;
+use Filament\Schemas\Components\Grid;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Columns\IconColumn;
+use Filament\Actions\ViewAction;
+use Filament\Actions\Action;
+use Filament\Actions\BulkActionGroup;
+use Filament\Actions\BulkAction;
+use Filament\Actions\DeleteBulkAction;
 use Filament\Facades\Filament;
 use Filament\Forms\Components\TagsInput;
-use Filament\Infolists\Components\Grid;
 use Filament\Infolists\Components\RepeatableEntry;
-use Filament\Infolists\Components\Section;
-use Filament\Infolists\Components\Tabs;
-use Filament\Infolists\Components\Tabs\Tab;
 use Filament\Infolists\Components\TextEntry;
 use Filament\Infolists\Components\ViewEntry;
-use Filament\Infolists\Infolist;
 use Filament\Notifications\Notification;
 use Filament\Resources\Resource;
 use Filament\Tables;
-use Filament\Tables\Actions\Action;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Carbon;
@@ -70,10 +76,10 @@ class MailResource extends Resource
         return __('Emails');
     }
 
-    public static function infolist(Infolist $infolist): Infolist
+    public static function infolist(Schema $schema): Schema
     {
-        return $infolist
-            ->schema([
+        return $schema
+            ->components([
                 Section::make('General')
                     ->icon('heroicon-o-envelope')
                     ->compact()
@@ -178,7 +184,7 @@ class MailResource extends Resource
                                                     ->label(__('Type'))
                                                     ->badge()
                                                     ->url(function (MailEvent $record) {
-                                                        $panel = Filament::getCurrentPanel();
+                                                        $panel = Filament::getCurrentOrDefaultPanel();
                                                         $tenant = Filament::getTenant();
 
                                                         if (! $panel || ! $tenant) {
@@ -205,7 +211,7 @@ class MailResource extends Resource
                                                     }),
                                                 TextEntry::make('occurred_at')
                                                     ->url(function (MailEvent $record) {
-                                                        $panel = Filament::getCurrentPanel();
+                                                        $panel = Filament::getCurrentOrDefaultPanel();
                                                         $tenant = Filament::getTenant();
 
                                                         if (! $panel || ! $tenant) {
@@ -318,7 +324,7 @@ class MailResource extends Resource
             ->defaultSort('created_at', 'desc')
             ->paginated([50, 100, 'all'])
             ->columns([
-                Tables\Columns\TextColumn::make('status')
+                TextColumn::make('status')
                     ->label(__('Status'))
                     ->sortable()
                     ->searchable(false)
@@ -335,32 +341,32 @@ class MailResource extends Resource
                         __('Unsent') => 'gray',
                         default => 'gray',
                     }),
-                Tables\Columns\TextColumn::make('subject')
+                TextColumn::make('subject')
                     ->label(__('Subject'))
                     ->limit(35)
                     ->sortable()
                     ->searchable(['subject', 'html', 'text']),
-                Tables\Columns\IconColumn::make('attachments')
+                IconColumn::make('attachments')
                     ->label('')
                     ->alignLeft()
                     ->searchable(false)
                     ->getStateUsing(fn (Mail $record) => $record->attachments->count() > 0)
                     ->icon(fn (string $state): string => $state ? 'heroicon-o-paper-clip' : ''),
-                Tables\Columns\TextColumn::make('to')
+                TextColumn::make('to')
                     ->label(__('Recipient(s)'))
                     ->limit(50)
                     ->getStateUsing(fn (Mail $record) => self::formatMailState(emails: $record->to, mailOnly: true))
                     ->sortable()
                     ->searchable(),
-                Tables\Columns\TextColumn::make('opens')
+                TextColumn::make('opens')
                     ->label(__('Opens'))
                     ->tooltip(fn (Mail $record) => __('Last opened at :date', ['date' => $record->last_opened_at?->format('d-m-Y H:i')]))
                     ->sortable(),
-                Tables\Columns\TextColumn::make('clicks')
+                TextColumn::make('clicks')
                     ->label(__('Clicks'))
                     ->tooltip(fn (Mail $record) => __('Last clicked at :date', ['date' => $record->last_clicked_at?->format('d-m-Y H:i')]))
                     ->sortable(),
-                Tables\Columns\TextColumn::make('sent_at')
+                TextColumn::make('sent_at')
                     ->label(__('Sent At'))
                     ->dateTime('d-m-Y H:i')
                     ->since()
@@ -374,8 +380,8 @@ class MailResource extends Resource
             ->filters([
                 //
             ])
-            ->actions([
-                Tables\Actions\ViewAction::make()
+            ->recordActions([
+                ViewAction::make()
                     // ->url(null)
                     ->modal()
                     ->slideOver()
@@ -389,7 +395,7 @@ class MailResource extends Resource
                     ->modalDescription(__('Are you sure you want to resend this mail?'))
                     ->hiddenLabel()
                     ->tooltip(__('Resend'))
-                    ->form(self::getResendForm())
+                    ->schema(self::getResendForm())
                     ->fillForm(function (Mail $record) {
                         return [
                             'to' => array_keys($record->to ?: []),
@@ -406,14 +412,14 @@ class MailResource extends Resource
                             ->send();
                     }),
             ])
-            ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\BulkAction::make('resend')
+            ->toolbarActions([
+                BulkActionGroup::make([
+                    BulkAction::make('resend')
                         ->label(__('Resend'))
                         ->icon('heroicon-o-arrow-uturn-right')
                         ->requiresConfirmation()
                         ->modalDescription(__('Are you sure you want to resend the selected mails?'))
-                        ->form(fn ($records) => self::getBulkResendForm($records))
+                        ->schema(fn ($records) => self::getBulkResendForm($records))
                         ->action(function (Collection $records, array $data) {
                             foreach ($records as $record) {
                                 (new ResendMail)->handle($record, $data['to'], $data['cc'] ?? [], $data['bcc'] ?? []);
@@ -425,7 +431,7 @@ class MailResource extends Resource
                                 ->send();
                         })
                         ->deselectRecordsAfterCompletion(),
-                    Tables\Actions\DeleteBulkAction::make(),
+                    DeleteBulkAction::make(),
                 ]),
             ]);
     }
