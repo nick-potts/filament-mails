@@ -2,12 +2,12 @@
 
 namespace Vormkracht10\FilamentMails;
 
-use Vormkracht10\FilamentMails\Resources\MailResource;
-use Vormkracht10\FilamentMails\Resources\EventResource;
-use Vormkracht10\FilamentMails\Resources\SuppressionResource;
 use Filament\Contracts\Plugin;
 use Filament\Panel;
 use Filament\Support\Colors\Color;
+use Vormkracht10\FilamentMails\Resources\EventResource;
+use Vormkracht10\FilamentMails\Resources\MailResource;
+use Vormkracht10\FilamentMails\Resources\SuppressionResource;
 
 class FilamentMailsPlugin implements Plugin
 {
