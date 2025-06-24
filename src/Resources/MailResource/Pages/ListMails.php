@@ -1,13 +1,13 @@
 <?php
 
-namespace Vormkracht10\FilamentMails\Resources\MailResource\Pages;
+namespace Backstage\FilamentMails\Resources\MailResource\Pages;
 
-use Filament\Resources\Components\Tab;
+use Backstage\FilamentMails\Resources\MailResource;
+use Backstage\FilamentMails\Resources\MailResource\Widgets\MailStatsWidget;
+use Backstage\Mails\Models\Mail;
 use Filament\Resources\Pages\ListRecords;
+use Filament\Schemas\Components\Tabs\Tab;
 use Illuminate\Database\Eloquent\Builder;
-use Vormkracht10\FilamentMails\Resources\MailResource;
-use Vormkracht10\FilamentMails\Resources\MailResource\Widgets\MailStatsWidget;
-use Vormkracht10\Mails\Models\Mail;
 
 class ListMails extends ListRecords
 {
