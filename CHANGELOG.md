@@ -2,6 +2,29 @@
 
 All notable changes to `filament-mails` will be documented in this file.
 
+## v3.0.0 - 2025-06-24
+
+### Breaking changes
+
+- Updated to Filament v4
+- Changed namespace to Backstage
+
+### What's Changed
+
+* fix bulk resend by @cntabana in https://github.com/backstagephp/filament-mails/pull/33
+* fix single resend action by @cntabana in https://github.com/backstagephp/filament-mails/pull/34
+* Fix issue with navigation icons by @Skullbock in https://github.com/backstagephp/filament-mails/pull/37
+* Bump dependabot/fetch-metadata from 2.3.0 to 2.4.0 by @dependabot in https://github.com/backstagephp/filament-mails/pull/41
+* [Fix] Hardcoded MailAttachment model should be replaced by config by @Baspa in https://github.com/backstagephp/filament-mails/pull/44
+* Update SuppressionResource.php by @bariskanberkay in https://github.com/backstagephp/filament-mails/pull/46
+
+### New Contributors
+
+* @cntabana made their first contribution in https://github.com/backstagephp/filament-mails/pull/33
+* @bariskanberkay made their first contribution in https://github.com/backstagephp/filament-mails/pull/46
+
+**Full Changelog**: https://github.com/backstagephp/filament-mails/compare/v2.3.0...v3.0.0
+
 ## v2.3.5 - 2025-04-08
 
 ### What's Changed
