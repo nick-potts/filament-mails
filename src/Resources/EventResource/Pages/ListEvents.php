@@ -1,13 +1,13 @@
 <?php
 
-namespace Vormkracht10\FilamentMails\Resources\EventResource\Pages;
+namespace Backstage\FilamentMails\Resources\EventResource\Pages;
 
 use Filament\Resources\Pages\ListRecords;
 use Filament\Schemas\Components\Tabs\Tab;
 use Illuminate\Database\Eloquent\Builder;
-use Vormkracht10\FilamentMails\Resources\EventResource;
-use Vormkracht10\Mails\Enums\EventType;
-use Vormkracht10\Mails\Models\MailEvent;
+use Backstage\FilamentMails\Resources\EventResource;
+use Backstage\Mails\Enums\EventType;
+use Backstage\Mails\Models\MailEvent;
 
 class ListEvents extends ListRecords
 {

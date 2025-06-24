@@ -1,15 +1,15 @@
 {
-    "name": "vormkracht10/filament-mails",
+    "name": "backstagephp/filament-mails",
     "description": "View logged mails and events in a beautiful Filament UI.",
     "keywords": [
-        "vormkracht10",
+        "backstagephp",
         "laravel",
         "filament-mails"
     ],
-    "homepage": "https://github.com/vormkracht10/filament-mails",
+    "homepage": "https://github.com/backstagephp/filament-mails",
     "support": {
-        "issues": "https://github.com/vormkracht10/filament-mails/issues",
-        "source": "https://github.com/vormkracht10/filament-mails"
+        "issues": "https://github.com/backstagephp/filament-mails/issues",
+        "source": "https://github.com/backstagephp/filament-mails"
     },
     "license": "MIT",
     "authors": [
@@ -23,7 +23,7 @@
         "php": "^8.2",
         "filament/filament": "^4.0",
         "spatie/laravel-package-tools": "^1.15.0",
-        "vormkracht10/laravel-mails": "^1.0"
+        "backstagephp/laravel-mails": "^1.0"
     },
     "require-dev": {
         "laravel/pint": "^1.16",
@@ -35,12 +35,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Vormkracht10\\FilamentMails\\": "src/"
+            "Backstage\\FilamentMails\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Vormkracht10\\FilamentMails\\Tests\\": "tests/"
+            "Backstage\\FilamentMails\\Tests\\": "tests/"
         }
     },
     "scripts": {
@@ -61,10 +61,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Vormkracht10\\FilamentMails\\FilamentMailsServiceProvider"
+                "Backstage\\FilamentMails\\FilamentMailsServiceProvider"
             ],
             "aliases": {
-                "FilamentMails": "Vormkracht10\\FilamentMails\\Facades\\FilamentMails"
+                "FilamentMails": "Backstage\\FilamentMails\\Facades\\FilamentMails"
             }
         }
     },

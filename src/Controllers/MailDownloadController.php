@@ -1,10 +1,10 @@
 <?php
 
-namespace Vormkracht10\FilamentMails\Controllers;
+namespace Backstage\FilamentMails\Controllers;
 
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Config;
-use Vormkracht10\Mails\Models\MailAttachment;
+use Backstage\Mails\Models\MailAttachment;
 
 class MailDownloadController extends Controller
 {

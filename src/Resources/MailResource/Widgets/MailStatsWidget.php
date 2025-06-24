@@ -1,6 +1,6 @@
 <?php
 
-namespace Vormkracht10\FilamentMails\Resources\MailResource\Widgets;
+namespace Backstage\FilamentMails\Resources\MailResource\Widgets;
 
 use Filament\Facades\Filament;
 use Filament\Widgets\StatsOverviewWidget as BaseWidget;

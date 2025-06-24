@@ -1,6 +1,6 @@
 <?php
 
-namespace Vormkracht10\FilamentMails\Resources;
+namespace Backstage\FilamentMails\Resources;
 
 use Filament\Actions\Action;
 use Filament\Actions\BulkAction;
@@ -27,13 +27,13 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
 use Illuminate\Support\HtmlString;
 use Illuminate\View\View;
-use Vormkracht10\FilamentMails\Resources\MailResource\Pages\ListMails;
-use Vormkracht10\FilamentMails\Resources\MailResource\Pages\ViewMail;
-use Vormkracht10\FilamentMails\Resources\MailResource\Widgets\MailStatsWidget;
-use Vormkracht10\Mails\Actions\ResendMail;
-use Vormkracht10\Mails\Enums\EventType;
-use Vormkracht10\Mails\Models\Mail;
-use Vormkracht10\Mails\Models\MailEvent;
+use Backstage\FilamentMails\Resources\MailResource\Pages\ListMails;
+use Backstage\FilamentMails\Resources\MailResource\Pages\ViewMail;
+use Backstage\FilamentMails\Resources\MailResource\Widgets\MailStatsWidget;
+use Backstage\Mails\Actions\ResendMail;
+use Backstage\Mails\Enums\EventType;
+use Backstage\Mails\Models\Mail;
+use Backstage\Mails\Models\MailEvent;
 
 class MailResource extends Resource
 {

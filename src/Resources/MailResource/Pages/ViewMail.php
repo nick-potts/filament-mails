@@ -1,9 +1,9 @@
 <?php
 
-namespace Vormkracht10\FilamentMails\Resources\MailResource\Pages;
+namespace Backstage\FilamentMails\Resources\MailResource\Pages;
 
 use Filament\Resources\Pages\ViewRecord;
-use Vormkracht10\FilamentMails\Resources\MailResource;
+use Backstage\FilamentMails\Resources\MailResource;
 
 class ViewMail extends ViewRecord
 {

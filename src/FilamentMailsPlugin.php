@@ -1,13 +1,13 @@
 <?php
 
-namespace Vormkracht10\FilamentMails;
+namespace Backstage\FilamentMails;
 
 use Filament\Contracts\Plugin;
 use Filament\Panel;
 use Filament\Support\Colors\Color;
-use Vormkracht10\FilamentMails\Resources\EventResource;
-use Vormkracht10\FilamentMails\Resources\MailResource;
-use Vormkracht10\FilamentMails\Resources\SuppressionResource;
+use Backstage\FilamentMails\Resources\EventResource;
+use Backstage\FilamentMails\Resources\MailResource;
+use Backstage\FilamentMails\Resources\SuppressionResource;
 
 class FilamentMailsPlugin implements Plugin
 {

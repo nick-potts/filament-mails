@@ -1,6 +1,6 @@
 <?php
 
-namespace Vormkracht10\FilamentMails;
+namespace Backstage\FilamentMails;
 
 use Filament\Support\Assets\AlpineComponent;
 use Filament\Support\Assets\Asset;
@@ -13,7 +13,7 @@ use Livewire\Features\SupportTesting\Testable;
 use Spatie\LaravelPackageTools\Commands\InstallCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use Vormkracht10\FilamentMails\Testing\TestsFilamentMails;
+use Backstage\FilamentMails\Testing\TestsFilamentMails;
 
 class FilamentMailsServiceProvider extends PackageServiceProvider
 {
@@ -35,7 +35,7 @@ class FilamentMailsServiceProvider extends PackageServiceProvider
                     ->publishConfigFile()
                     ->publishMigrations()
                     ->askToRunMigrations()
-                    ->askToStarRepoOnGitHub('vormkracht10/filament-mails');
+                    ->askToStarRepoOnGitHub('backstagephp/filament-mails');
             });
 
         $configFileName = $package->shortName();
@@ -87,7 +87,7 @@ class FilamentMailsServiceProvider extends PackageServiceProvider
 
     protected function getAssetPackageName(): ?string
     {
-        return 'vormkracht10/filament-mails';
+        return 'backstagephp/filament-mails';
     }
 
     /**

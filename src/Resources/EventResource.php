@@ -1,6 +1,6 @@
 <?php
 
-namespace Vormkracht10\FilamentMails\Resources;
+namespace Backstage\FilamentMails\Resources;
 
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
@@ -13,10 +13,10 @@ use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
-use Vormkracht10\FilamentMails\Resources\EventResource\Pages\ListEvents;
-use Vormkracht10\FilamentMails\Resources\EventResource\Pages\ViewEvent;
-use Vormkracht10\Mails\Enums\EventType;
-use Vormkracht10\Mails\Models\MailEvent;
+use Backstage\FilamentMails\Resources\EventResource\Pages\ListEvents;
+use Backstage\FilamentMails\Resources\EventResource\Pages\ViewEvent;
+use Backstage\Mails\Enums\EventType;
+use Backstage\Mails\Models\MailEvent;
 
 class EventResource extends Resource
 {
