@@ -23,7 +23,7 @@
         "php": "^8.2",
         "filament/filament": "^4.0",
         "spatie/laravel-package-tools": "^1.15.0",
-        "backstagephp/laravel-mails": "^1.0"
+        "backstage/laravel-mails": "^1.0"
     },
     "require-dev": {
         "laravel/pint": "^1.16",
