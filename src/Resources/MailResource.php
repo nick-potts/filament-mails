@@ -95,22 +95,22 @@ class MailResource extends Resource
                                                     ->label(__('Subject')),
                                                 TextEntry::make('from')
                                                     ->label(__('From'))
-                                                    ->getStateUsing(fn (Mail $record) => self::formatMailState($record->from)),
+                                                    ->formatStateUsing(fn (Mail $record) => self::formatMailState($record->from)),
                                                 TextEntry::make('to')
                                                     ->label(__('Recipient(s)'))
-                                                    ->getStateUsing(fn (Mail $record) => self::formatMailState($record->to)),
+                                                    ->formatStateUsing(fn (Mail $record) => self::formatMailState($record->to)),
                                                 TextEntry::make('cc')
                                                     ->label(__('CC'))
                                                     ->default('-')
-                                                    ->getStateUsing(fn (Mail $record) => self::formatMailState($record->cc ?? [])),
+                                                    ->formatStateUsing(fn (Mail $record) => self::formatMailState($record->cc ?? [])),
                                                 TextEntry::make('bcc')
                                                     ->label(__('BCC'))
                                                     ->default('-')
-                                                    ->getStateUsing(fn (Mail $record) => self::formatMailState($record->bcc ?? [])),
+                                                    ->formatStateUsing(fn (Mail $record) => self::formatMailState($record->bcc ?? [])),
                                                 TextEntry::make('reply_to')
                                                     ->default('-')
                                                     ->label(__('Reply To'))
-                                                    ->getStateUsing(fn (Mail $record) => self::formatMailState($record->reply_to ?? [])),
+                                                    ->formatStateUsing(fn (Mail $record) => self::formatMailState($record->reply_to ?? [])),
                                             ]),
                                     ]),
                                 Tab::make(__('Statistics'))
@@ -352,7 +352,7 @@ class MailResource extends Resource
                 TextColumn::make('to')
                     ->label(__('Recipient(s)'))
                     ->limit(50)
-                    ->getStateUsing(fn (Mail $record) => self::formatMailState(emails: $record->to, mailOnly: true))
+                    ->formatStateUsing(fn (Mail $record) => self::formatMailState(emails: $record->to, mailOnly: true))
                     ->sortable()
                     ->searchable(),
                 TextColumn::make('opens')
