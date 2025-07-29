@@ -349,8 +349,8 @@ class MailResource extends Resource
                     ->label('')
                     ->alignLeft()
                     ->searchable(false)
-                    ->getStateUsing(fn (Mail $record) => $record->attachments->count() > 0)
-                    ->icon(fn (string $state): string => $state ? 'heroicon-o-paper-clip' : ''),
+                    ->getStateUsing(fn (Mail $record) => $record->attachments->count() > 0 ? true : null)
+                    ->icon('heroicon-o-paper-clip'),
                 TextColumn::make('to')
                     ->label(__('Recipient(s)'))
                     ->limit(50)
