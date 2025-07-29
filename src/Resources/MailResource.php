@@ -305,7 +305,7 @@ class MailResource extends Resource
                                             ->label(__('Mime Type')),
                                         ViewEntry::make('uuid')
                                             ->label(__('Download'))
-                                            ->formatStateUsing(fn ($record) => $record)
+                                            ->getStateUsing(fn ($record) => $record)
                                             ->view('filament-mails::mails.download'),
                                     ]),
                             ]),
@@ -347,7 +347,7 @@ class MailResource extends Resource
                     ->label('')
                     ->alignLeft()
                     ->searchable(false)
-                    ->formatStateUsing(fn (Mail $record) => $record->attachments->count() > 0 ? true : null)
+                    ->getStateUsing(fn (Mail $record) => $record->attachments->count() > 0 ? true : null)
                     ->icon('heroicon-o-paper-clip'),
                 TextColumn::make('to')
                     ->label(__('Recipient(s)'))
