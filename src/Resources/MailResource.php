@@ -244,14 +244,12 @@ class MailResource extends Resource
                                 Tab::make('Preview')
                                     ->extraAttributes(['class' => 'w-full max-w-full'])
                                     ->schema([
-                                        TextEntry::make('html')
+                                        ViewEntry::make('html')
                                             ->hiddenLabel()
                                             ->label(__('HTML Content'))
                                             ->extraAttributes(['class' => 'overflow-x-auto'])
-                                            ->formatStateUsing(fn (string $state, Mail $record): View => view(
-                                                'filament-mails::mails.preview',
-                                                ['html' => $state, 'mail' => $record],
-                                            )),
+                                            ->view('filament-mails::mails.preview')
+                                            ->viewData(fn (string $state, Mail $record) => ['html' => $state, 'mail' => $record]),
                                     ]),
                                 Tab::make('HTML')
                                     ->schema([
